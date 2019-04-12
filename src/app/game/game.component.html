@@ -1,0 +1,20 @@
+<div class="main-content">
+  <div class="game-container">
+    <div
+      class="card-container"
+      *ngFor="let item of cardsArray; let i = index"
+      [class.rotate]="item.isRotated"
+      (click)="flipCard(i)"
+    >
+      <div class="front">
+        <img class="cover" src="{{ item.cover }}" />
+      </div>
+      <div class="front back">
+        <img class="thumb" src="{{ item.thumbnail }}" />
+      </div>
+    </div>
+  </div>
+  <div class="game-popup" *ngIf="gameWon">
+    <button (click)="restartGame()">NEW GAME</button>
+  </div>
+</div>

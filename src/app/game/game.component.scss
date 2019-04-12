@@ -1,0 +1,112 @@
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../assets/bg-image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  .game-container {
+    display: grid;
+    grid-template-columns: calc(100vw / 5) calc(100vw / 5) calc(100vw / 5) calc(100vw / 5) calc(100vw / 5);
+    grid-template-rows: calc(100vh / 4) calc(100vh / 4) calc(100vh / 4) calc(100vh / 4);
+    width: 100vw;
+    height: 100vh;
+    align-content: center;
+    justify-content: center;
+    .card-container {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      transform-style: preserve-3d;
+      transition: all 0.8s ease-in-out;
+      &.rotate {
+        transform: rotateY(180deg);
+      }
+      .front {
+        height: calc(100% - 10px);
+        backface-visibility: hidden;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        img {
+          height: 100%;
+        }
+      }
+      .back {
+        transform: rotateY(180deg);
+      }
+    }
+  }
+
+  .game-popup {
+    position: absolute;
+    height: 500px;
+    width: 350px;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      background: transparent;
+      border: none;
+      font-size: 30px;
+      margin: 10px;
+      font-weight: bold;
+      color: #2196f3;
+      cursor: pointer;
+      outline: none;
+      &:hover {
+        color: #00bcd4;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+
+  .main-content .game-container {
+    grid-template-columns: calc(100vw / 4) calc(100vw / 4) calc(100vw / 4) calc(100vw / 4);
+    grid-template-rows: calc(100vh / 5) calc(100vh / 5) calc(100vh / 5) calc( 100vh / 5) calc(100vh / 5);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main-content {
+    .game-container {
+      .card-container .front {
+        height: 60%;
+      }
+    }
+    .game-popup {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) and (min-height: 1000px) {
+  .main-content .game-container {
+    .card-container .front {
+      height: 65%;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) and (min-height: 700px) {
+  .main-content .game-container {
+    .card-container .front {
+      height: 50%;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) and (min-height: 900px) {
+  .main-content .game-container {
+    .card-container .front {
+      height: 50%;
+    }
+  }
+}
