@@ -1,42 +1,42 @@
 [
   {
     "value": 1,
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/220px-SNice.svg.png"
+    "thumbnail": "assets/icons/bootstrap.png"
   },
   {
     "value": 2,
-    "thumbnail": "https://www.pngmart.com/files/7/Smiley-PNG-Clipart.png"
+    "thumbnail": "assets/icons/css3.png"
   },
   {
     "value": 3,
-    "thumbnail": "https://1.bp.blogspot.com/-tm-45kWLxsk/UdnERWF-QnI/AAAAAAAAA1M/Eeqyjc9QwE4/s1600/red-angry-smiley.png"
+    "thumbnail": "assets/icons/git.png"
   },
   {
     "value": 4,
-    "thumbnail": "https://www.pngmart.com/files/7/Smiley-PNG-Photos.png"
+    "thumbnail": "assets/icons/html5.png"
   },
   {
     "value": 5,
-    "thumbnail": "https://s-media-cache-ak0.pinimg.com/originals/12/70/60/12706060696a063525191c0afb8c4d60.png"
+    "thumbnail": "assets/icons/js.jpg"
   },
   {
     "value": 6,
-    "thumbnail": "https://i.pinimg.com/originals/f2/bd/7d/f2bd7d4467b453b64adff13527e37c84.png"
+    "thumbnail": "assets/icons/net.png"
   },
   {
     "value": 7,
-    "thumbnail": "https://i.pinimg.com/originals/d1/81/ac/d181acbfafc073c3b99296aab883f575.png"
+    "thumbnail": "assets/icons/sass.png"
   },
   {
     "value": 8,
-    "thumbnail": "https://sc.mogicons.com/l/dreamy-emoticon-378.png"
+    "thumbnail": "assets/icons/sql.png"
   },
   {
     "value": 9,
-    "thumbnail": "https://clipart.info/images/ccovers/1531010991winking-emoji-png.png"
+    "thumbnail": "assets/icons/jquery.png"
   },
   {
     "value": 10,
-    "thumbnail": "https://pldzimages.s3.amazonaws.com/products/2458518_detail.png"
+    "thumbnail": "assets/icons/nodejs.png"
   }
 ]
