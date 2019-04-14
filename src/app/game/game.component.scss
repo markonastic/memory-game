@@ -7,8 +7,8 @@
   background-size: cover;
   .game-container {
     display: grid;
-    grid-template-columns: calc(100vw / 5) calc(100vw / 5) calc(100vw / 5) calc(100vw / 5) calc(100vw / 5);
-    grid-template-rows: calc(100vh / 4) calc(100vh / 4) calc(100vh / 4) calc(100vh / 4);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     width: 100vw;
     height: 100vh;
     align-content: center;
@@ -24,17 +24,24 @@
       }
       .front {
         height: calc(100% - 10px);
-        backface-visibility: hidden;
         position: absolute;
-        display: flex;
-        justify-content: center;
-        align-content: center;
         img {
           height: 100%;
         }
       }
       .back {
         transform: rotateY(180deg);
+        backface-visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .bg {
+          height: 100%;
+        }
+        .thumb {
+          height: 50%;
+          position: absolute;
+        }
       }
     }
   }
@@ -66,17 +73,16 @@
 }
 
 @media screen and (max-width: 900px) {
-
   .main-content .game-container {
-    grid-template-columns: calc(100vw / 4) calc(100vw / 4) calc(100vw / 4) calc(100vw / 4);
-    grid-template-rows: calc(100vh / 5) calc(100vh / 5) calc(100vh / 5) calc( 100vh / 5) calc(100vh / 5);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
   }
 }
 
 @media screen and (max-width: 550px) {
   .main-content {
     .game-container {
-      .card-container .front {
+      .card-container .front, .card-container .back {
         height: 60%;
       }
     }
@@ -89,7 +95,7 @@
 
 @media screen and (max-width: 800px) and (min-height: 1000px) {
   .main-content .game-container {
-    .card-container .front {
+    .card-container .front, .card-container .back {
       height: 65%;
     }
   }
@@ -97,7 +103,7 @@
 
 @media screen and (max-width: 500px) and (min-height: 700px) {
   .main-content .game-container {
-    .card-container .front {
+    .card-container .front, .card-container .back {
       height: 50%;
     }
   }
@@ -105,7 +111,7 @@
 
 @media screen and (min-width: 900px) and (min-height: 900px) {
   .main-content .game-container {
-    .card-container .front {
+    .card-container .front, .card-container .back {
       height: 50%;
     }
   }

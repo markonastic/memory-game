@@ -1,5 +1,5 @@
 export class Picture {
-  cover = 'https://cdn.freebiesupply.com/logos/large/2x/angular-icon-logo-png-transparent.png';
+  cover = 'assets/icons/angular.png';
   isRotated = false;
 
   constructor(private value: number, private thumbnail: string) {}
