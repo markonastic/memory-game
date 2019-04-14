@@ -25,13 +25,13 @@
       .front {
         height: calc(100% - 10px);
         position: absolute;
+        backface-visibility: hidden;
         img {
           height: 100%;
         }
       }
       .back {
         transform: rotateY(180deg);
-        backface-visibility: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -81,10 +81,8 @@
 
 @media screen and (max-width: 550px) {
   .main-content {
-    .game-container {
-      .card-container .front, .card-container .back {
-        height: 60%;
-      }
+    .game-container .card-container .front {
+      height: 60%;
     }
     .game-popup {
       width: 100vw;
@@ -95,7 +93,7 @@
 
 @media screen and (max-width: 800px) and (min-height: 1000px) {
   .main-content .game-container {
-    .card-container .front, .card-container .back {
+    .card-container .front {
       height: 65%;
     }
   }
@@ -103,7 +101,7 @@
 
 @media screen and (max-width: 500px) and (min-height: 700px) {
   .main-content .game-container {
-    .card-container .front, .card-container .back {
+    .card-container .front {
       height: 50%;
     }
   }
@@ -111,8 +109,8 @@
 
 @media screen and (min-width: 900px) and (min-height: 900px) {
   .main-content .game-container {
-    .card-container .front, .card-container .back {
-      height: 50%;
+    .card-container .front {
+      height: calc(100% - 10px);
     }
   }
 }

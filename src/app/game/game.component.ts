@@ -64,11 +64,9 @@ export class GameComponent implements OnInit {
   }
 
   shuffleArray() {
-      let temporaryValue: number;
-      let randomIndex: number;
       for (let i = 0; i < this.cardsArray.length; i++) {
-        randomIndex = Math.floor(Math.random() * i);
-        temporaryValue = this.cardsArray[i];
+        const randomIndex = Math.floor(Math.random() * this.cardsArray.length);
+        const temporaryValue = this.cardsArray[i];
         this.cardsArray[i] = this.cardsArray[randomIndex];
         this.cardsArray[randomIndex] = temporaryValue;
       }
