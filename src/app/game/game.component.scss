@@ -26,6 +26,10 @@
         height: calc(100% - 10px);
         position: absolute;
         backface-visibility: hidden;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         img {
           height: 100%;
         }
