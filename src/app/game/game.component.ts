@@ -1,6 +1,7 @@
-import { Picture } from './../other/picture';
 import { Component, OnInit } from '@angular/core';
-import picturesJSON from '../../assets/pictures.json';
+
+import { IPicture } from './../other/picture';
+import { PictureService } from '../services/picture.service';
 
 @Component({
   selector: 'app-game',
@@ -9,22 +10,24 @@ import picturesJSON from '../../assets/pictures.json';
 })
 export class GameComponent implements OnInit {
 
-  pictures: any[];
-  cards = [];
-  cardsCopy = [];
-  cardsArray = [];
-  indexes = [];
-  gameWon = false;
-  match: number;
+  public pictures: IPicture[] = null;
+  public cards: IPicture[] = null;
+  public cardsCopy: IPicture[] = null;
+  public cardsArray: IPicture[] = null;
+  public indexes: number[] = null;
+  public gameWon: boolean = null;
+  public match: number = null;
 
-  constructor() {}
+  constructor(private pictureService: PictureService) {}
 
-  ngOnInit() {
-    this.pictures = picturesJSON;
-    this.restartGame();
+  ngOnInit(): void {
+    this.pictureService.getJSON().subscribe((pictures: IPicture[]) => {
+      this.pictures = pictures;
+    });
+    this.startGame();
   }
 
-  restartGame() {
+  public startGame(): void {
     this.cards = this.pictures.map(p => new Picture(p.value, p.thumbnail));
     this.cardsCopy = this.pictures.map(p => new Picture(p.value, p.thumbnail));
     this.cardsArray = this.cards.concat(this.cardsCopy);
@@ -33,7 +36,7 @@ export class GameComponent implements OnInit {
     this.gameWon = false;
   }
 
-  flipCard(index: number) {
+  public flipCard(index: number): void {
       if (this.indexes.length < 2 && this.indexes[0] !== index) {
         this.indexes.push(index);
         this.cardsArray[index].isRotated = true;
@@ -46,7 +49,7 @@ export class GameComponent implements OnInit {
       }
   }
 
-  checkCards() {
+  public checkCards(): void {
       if (this.cardsArray[this.indexes[0]].value === this.cardsArray[this.indexes[1]].value) {
           this.match++;
           this.isGameWon();
@@ -57,13 +60,13 @@ export class GameComponent implements OnInit {
       this.indexes = [];
   }
 
-  isGameWon() {
+  public isGameWon(): void {
       if (this.match === this.cards.length) {
           this.gameWon = true;
       }
   }
 
-  shuffleArray() {
+  public shuffleArray(): void {
       for (let i = 0; i < this.cardsArray.length; i++) {
         const randomIndex = Math.floor(Math.random() * this.cardsArray.length);
         const temporaryValue = this.cardsArray[i];
@@ -72,3 +75,46 @@ export class GameComponent implements OnInit {
       }
   }
 }
+
+const pictures: ICard[] = [
+  {
+    value: 1,
+    thumbnail: 'assets/icons/bootstrap.png'
+  },
+  {
+    value: 2,
+    thumbnail: 'assets/icons/css3.png'
+  },
+  {
+    value: 3,
+    thumbnail: 'assets/icons/git.png'
+  },
+  {
+    value: 4,
+    thumbnail: 'assets/icons/html5.png'
+  },
+  {
+    value: 5,
+    thumbnail: 'assets/icons/js.jpg'
+  },
+  {
+    value: 6,
+    thumbnail: 'assets/icons/net.png'
+  },
+  {
+    value: 7,
+    thumbnail: 'assets/icons/sass.png'
+  },
+  {
+    value: 8,
+    thumbnail: 'assets/icons/sql.png'
+  },
+  {
+    value: 9,
+    thumbnail: 'assets/icons/jquery.png'
+  },
+  {
+    value: 10,
+    thumbnail: 'assets/icons/nodejs.png'
+  }
+]
