@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IPicture } from './../other/picture';
-import { PictureService } from '../services/picture.service';
+import { IPicture, Card, PICTURES_ARRAY } from '../other/data';
 
 @Component({
   selector: 'app-game',
@@ -10,111 +9,70 @@ import { PictureService } from '../services/picture.service';
 })
 export class GameComponent implements OnInit {
 
-  public pictures: IPicture[] = null;
-  public cards: IPicture[] = null;
-  public cardsCopy: IPicture[] = null;
-  public cardsArray: IPicture[] = null;
-  public indexes: number[] = null;
+  public pictures: IPicture[] = PICTURES_ARRAY;
+  public cards: Card[] = null;
+  public indexes: number[] = [];
   public gameWon: boolean = null;
-  public match: number = null;
+  public matchCount: number = null;
 
-  constructor(private pictureService: PictureService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.pictureService.getJSON().subscribe((pictures: IPicture[]) => {
-      this.pictures = pictures;
-    });
+    this.createCardsDeck();
     this.startGame();
   }
 
+  public createCardsDeck(): void {
+    const cards: Card[] = this.pictures.map((picture: IPicture, index: number) => new Card(picture, index));
+    const cardsCopy: Card[] = this.pictures.map((picture: IPicture, index: number) => new Card(picture, index));
+    this.cards = cards.concat(cardsCopy);
+  }
+
   public startGame(): void {
-    this.cards = this.pictures.map(p => new Picture(p.value, p.thumbnail));
-    this.cardsCopy = this.pictures.map(p => new Picture(p.value, p.thumbnail));
-    this.cardsArray = this.cards.concat(this.cardsCopy);
+    this.cards.map((card: Card) => card.isRotated = false);
     this.shuffleArray();
-    this.match = 0;
+    this.matchCount = 0;
     this.gameWon = false;
   }
 
   public flipCard(index: number): void {
-      if (this.indexes.length < 2 && this.indexes[0] !== index) {
-        this.indexes.push(index);
-        this.cardsArray[index].isRotated = true;
-        if (this.indexes.length === 2) {
-          const this1 = this;
-          setTimeout(() => {
-            this1.checkCards();
-          }, 1000);
-        }
+    if (this.indexes.length < 2 && this.indexes[0] !== index) {
+      this.indexes.push(index);
+      this.cards[index].isRotated = true;
+
+      if (this.indexes.length === 2) {
+        const self = this;
+
+        setTimeout(() => {
+          self.checkCards();
+        }, 1000);
       }
+    }
   }
 
   public checkCards(): void {
-      if (this.cardsArray[this.indexes[0]].value === this.cardsArray[this.indexes[1]].value) {
-          this.match++;
-          this.isGameWon();
-      } else {
-          this.cardsArray[this.indexes[0]].isRotated = false;
-          this.cardsArray[this.indexes[1]].isRotated = false;
-      }
-      this.indexes = [];
+    if (this.cards[this.indexes[0]].value === this.cards[this.indexes[1]].value) {
+        this.matchCount++;
+        this.isGameWon();
+    } else {
+        this.cards[this.indexes[0]].isRotated = false;
+        this.cards[this.indexes[1]].isRotated = false;
+    }
+    this.indexes = [];
   }
 
   public isGameWon(): void {
-      if (this.match === this.cards.length) {
-          this.gameWon = true;
-      }
+    if (this.matchCount === this.pictures.length) {
+        this.gameWon = true;
+    }
   }
 
   public shuffleArray(): void {
-      for (let i = 0; i < this.cardsArray.length; i++) {
-        const randomIndex = Math.floor(Math.random() * this.cardsArray.length);
-        const temporaryValue = this.cardsArray[i];
-        this.cardsArray[i] = this.cardsArray[randomIndex];
-        this.cardsArray[randomIndex] = temporaryValue;
-      }
+    for (let i = 0; i < this.cards.length; i++) {
+      const randomIndex = Math.floor(Math.random() * this.cards.length);
+      const temporaryValue = this.cards[i];
+      this.cards[i] = this.cards[randomIndex];
+      this.cards[randomIndex] = temporaryValue;
+    }
   }
 }
-
-const pictures: ICard[] = [
-  {
-    value: 1,
-    thumbnail: 'assets/icons/bootstrap.png'
-  },
-  {
-    value: 2,
-    thumbnail: 'assets/icons/css3.png'
-  },
-  {
-    value: 3,
-    thumbnail: 'assets/icons/git.png'
-  },
-  {
-    value: 4,
-    thumbnail: 'assets/icons/html5.png'
-  },
-  {
-    value: 5,
-    thumbnail: 'assets/icons/js.jpg'
-  },
-  {
-    value: 6,
-    thumbnail: 'assets/icons/net.png'
-  },
-  {
-    value: 7,
-    thumbnail: 'assets/icons/sass.png'
-  },
-  {
-    value: 8,
-    thumbnail: 'assets/icons/sql.png'
-  },
-  {
-    value: 9,
-    thumbnail: 'assets/icons/jquery.png'
-  },
-  {
-    value: 10,
-    thumbnail: 'assets/icons/nodejs.png'
-  }
-]

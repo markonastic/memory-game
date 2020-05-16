@@ -1,21 +1,15 @@
 <div class="main-content">
   <div class="game-container">
-    <div
-      class="card-container"
-      *ngFor="let item of cardsArray; let i = index"
-      [class.rotate]="item.isRotated"
-
-    >
-      <div class="front" >
-        <img class="cover" src="{{ item.cover }}" (click)="flipCard(i)" />
-      </div>
-      <div class="front back">
-        <img class="bg" src="assets/icons/angular-back.png" />
-        <img class="thumb" src="{{ item.thumbnail }}" />
+    <div class="card" *ngFor="let card of cards; let cardIndex = index"
+                      [class.rotate]="card.isRotated"
+                      (click)="flipCard(cardIndex)">
+      <div class="front"></div>
+      <div class="back">
+        <div class="thumbnail" [ngStyle]="{'background-image': 'url(' + card.thumbnail + ')'}" ></div>
       </div>
     </div>
   </div>
   <div class="game-popup" *ngIf="gameWon">
-    <button (click)="restartGame()">NEW GAME</button>
+    <button (click)="startGame()">NEW GAME</button>
   </div>
 </div>

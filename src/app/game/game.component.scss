@@ -1,50 +1,70 @@
 .main-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-image: url(../../assets/bg-image.png);
   background-repeat: no-repeat;
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   .game-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    align-items: center;
+    justify-items: center;
     width: 100vw;
     height: 100vh;
-    align-content: center;
-    justify-content: center;
-    .card-container {
-      display: grid;
-      justify-items: center;
-      align-items: center;
-      transform-style: preserve-3d;
-      transition: all 0.8s ease-in-out;
+
+    .card {
+      cursor: pointer;
+      height: calc(100% - 0.6rem);
+      width: calc(100% - 0.6rem);
+      perspective: 1000px;
+      position: relative;
+
       &.rotate {
-        transform: rotateY(180deg);
-      }
-      .front {
-        height: calc(100% - 10px);
-        position: absolute;
-        backface-visibility: hidden;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img {
-          height: 100%;
+        .front {
+          transform: rotateY(180deg);
+        }
+
+        .back {
+          transform: rotateY(0deg);
         }
       }
+
+      .front,
       .back {
-        transform: rotateY(180deg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .bg {
-          height: 100%;
-        }
-        .thumb {
-          height: 50%;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+        transition: transform ease-in-out 0.6s;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        top: 0;
+        left: 0;
+      }
+
+      .front {
+        background-image: url(../../assets/icons/angular.png);
+      }
+
+      .back {
+        transform: rotateY(-180deg);
+        background-image: url(../../assets/icons/angular-back.png);
+
+        .thumbnail {
           position: absolute;
+          height: 100%;
+          width: 100%;
+          background-position: center;
+          background-size: 30%;
+          background-repeat: no-repeat;
+          top: 0;
+          left: 0;
         }
       }
     }
@@ -52,69 +72,36 @@
 
   .game-popup {
     position: absolute;
-    height: 500px;
-    width: 350px;
-    background-color: rgba(0, 0, 0, 0.65);
+    height: 100vh;
+    width: 100vw;
+    background-color: #000000a6;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
     button {
-      background: transparent;
+      background-color: #03a9f4;
       border: none;
-      font-size: 30px;
-      margin: 10px;
+      font-size: 3rem;
+      margin: 0.6rem;
       font-weight: bold;
-      color: #2196f3;
+      color: #ffffff;
       cursor: pointer;
       outline: none;
+      white-space: nowrap;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+
       &:hover {
-        color: #00bcd4;
+        background-color: #037fb7;
       }
     }
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 800px) {
   .main-content .game-container {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .main-content {
-    .game-container .card-container .front {
-      height: 60%;
-    }
-    .game-popup {
-      width: 100vw;
-      height: 100vh;
-    }
-  }
-}
-
-@media screen and (max-width: 800px) and (min-height: 1000px) {
-  .main-content .game-container {
-    .card-container .front {
-      height: 65%;
-    }
-  }
-}
-
-@media screen and (max-width: 500px) and (min-height: 700px) {
-  .main-content .game-container {
-    .card-container .front {
-      height: 50%;
-    }
-  }
-}
-
-@media screen and (min-width: 900px) and (min-height: 900px) {
-  .main-content .game-container {
-    .card-container .front {
-      height: calc(100% - 10px);
-    }
   }
 }
